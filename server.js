@@ -41,6 +41,4 @@ app.get('/api/codes', (req, res) => {
   res.json(codes);
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+module.exports = app;
