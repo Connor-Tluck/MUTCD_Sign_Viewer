@@ -12,6 +12,14 @@ app.use('/images/mutcd', express.static(IMAGES_DIR, {
   maxAge: '30d', // Cache images for 30 days
 }));
 
+// Serve React frontend build
+app.use(express.static(path.join(__dirname, 'frontend', 'build')));
+
+// Fallback to React for any non-API route
+app.get(/^\/(?!api).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
+});
+
 // Helper to get all image files and codes
 function getSignFiles() {
   const files = fs.readdirSync(IMAGES_DIR)
